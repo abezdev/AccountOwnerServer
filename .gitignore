@@ -341,4 +341,4 @@ healthchecksdb
 /AccountOwnerServer/appsettings.Development.json
 /AccountOwnerServer/appsettings.json
 /AccountOwnerServer/Properties/launchSettings.json
-[Ll]oggerService/
+[Ff]FolderForLogs/
