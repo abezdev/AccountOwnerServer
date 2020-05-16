@@ -15,6 +15,7 @@ namespace Repository
         public OwnerRepository(RepositoryContext repositoryContext)
             : base(repositoryContext)
         {
+ 
         }
 
 
