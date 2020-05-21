@@ -18,7 +18,15 @@ namespace Repository
  
         }
 
-
+        //using pagination
+        public IEnumerable<Owner> GetOwners(OwnerParameters ownerParameters)
+        {
+            return FindAll()
+                .OrderBy(on => on.Name)
+                .Skip((ownerParameters.PageNumber - 1) * ownerParameters.PageSize)
+                .Take(ownerParameters.PageSize)
+                .ToList();
+        }
 
         public IEnumerable<Owner> GetAllOwners()
         {

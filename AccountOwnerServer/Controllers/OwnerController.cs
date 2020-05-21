@@ -27,26 +27,40 @@ namespace AccountOwnerServer.Controllers
             _mapper = mapper;
         }
 
+        //uses pagination via OwnerParameters
         [HttpGet]
-        public IActionResult GetAllOwners()
+        public IActionResult GetOwners([FromQuery] OwnerParameters ownerParameters)
         {
-            try
-            {
-                //var ownersfd = _repository.Owner.FindAll();
-                var owners = _repository.Owner.GetAllOwners();
+            var owners = _repository.Owner.GetOwners(ownerParameters);
 
-                _logger.LogInfo($"Returned all owners from database.");
+            _logger.LogInfo($"Returned {owners.Count()} owners from database.");
 
-                /* IEnumerable<OwnerDto> */ var ownersResult = _mapper.Map<IEnumerable<OwnerDto>>(owners);
-                return Ok(ownersResult);
-                //return Ok(owners);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Something went wrong inside GetAllOwners action: {ex.Message}");
-                return StatusCode(500, "Internal server error");
-            }
+            return Ok(owners);
         }
+
+        //[HttpGet]
+        //public IActionResult GetAllOwners()
+        //{
+        //    //return StatusCode(500);
+        //    //return NotFound();//404
+        //    try
+        //    {
+        //        //var ownersfd = _repository.Owner.FindAll();
+        //        var owners = _repository.Owner.GetAllOwners();
+
+        //        _logger.LogInfo($"Returned all owners from database.");
+
+        //        /* IEnumerable<OwnerDto> */
+        //        var ownersResult = _mapper.Map<IEnumerable<OwnerDto>>(owners);
+        //        return Ok(ownersResult);
+        //        //return Ok(owners);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError($"Something went wrong inside GetAllOwners action: {ex.Message}");
+        //        return StatusCode(500, "Internal server error");
+        //    }
+        //}
 
         
         [HttpGet("{id}", Name = "OwnerById")]//[HttpGet("{id}")]

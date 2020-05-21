@@ -16,5 +16,8 @@ namespace Contracts
         void UpdateOwner(Owner owner);
         void DeleteOwner(Owner owner);
 
+        //using pagination
+        IEnumerable<Owner> GetOwners(OwnerParameters ownerParameters);
+
     }
 }
